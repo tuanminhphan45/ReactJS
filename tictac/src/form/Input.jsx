@@ -21,23 +21,45 @@ const Input = () => {
         hobby: false,
     });
     console.log(values);
+    const [nameError, setNameError] = useState("");
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        if (values.fullname === "") {
+            setNameError("Your fullname is empty");
+            console.log("is worked");
+        } else {
+            setNameError("");
+        }
+    };
     return (
         <div className="flex flex-col gap-y-3">
-            <input
-                type="text"
-                name="fullname"
-                className="w-full max-w-[300px] p-5 border border-gray-200 rounded-lg"
-                placeholder="Enter your name"
-                onChange={handleChange}
-            />
-            <input
-                type="email"
-                name="email"
-                className="w-full max-w-[300px] p-5 border border-gray-200 rounded-lg"
-                placeholder="Enter your email address"
-                onChange={handleChange}
-            />
-            <input type="checkbox" name="hobby" onChange={handleChange} />
+            <form action="">
+                <div className="">
+                    <input
+                        type="text"
+                        name="fullname"
+                        className="w-full max-w-[300px] p-5 border border-gray-200 rounded-lg"
+                        placeholder="Enter your name"
+                        onChange={handleChange}
+                    />
+                    {nameError}
+                </div>
+
+                <input
+                    type="email"
+                    name="email"
+                    className="w-full max-w-[300px] p-5 border border-gray-200 rounded-lg"
+                    placeholder="Enter your email address"
+                    onChange={handleChange}
+                />
+                <input type="checkbox" name="hobby" onChange={handleChange} />
+                <button
+                    className="p-5 bg-blue-600 text-white from-indigo-100"
+                    onSubmit={handleSubmit}
+                >
+                    Submit
+                </button>
+            </form>
         </div>
     );
 };
