@@ -33,8 +33,12 @@ const Input = () => {
     };
     return (
         <div className="flex flex-col gap-y-3">
-            <form action="">
-                <div className="">
+            <form
+                className="flex gap-x-3"
+                autoComplete="off"
+                onSubmit={handleSubmit}
+            >
+                <div className="flex flex-col gap-y-3">
                     <input
                         type="text"
                         name="fullname"
@@ -44,7 +48,6 @@ const Input = () => {
                     />
                     {nameError}
                 </div>
-
                 <input
                     type="email"
                     name="email"
@@ -52,10 +55,10 @@ const Input = () => {
                     placeholder="Enter your email address"
                     onChange={handleChange}
                 />
-                <input type="checkbox" name="hobby" onChange={handleChange} />
+                {/* <input type="checkbox" name="hobby" onChange={handleChange} /> */}
                 <button
-                    className="p-5 bg-blue-600 text-white from-indigo-100"
-                    onSubmit={handleSubmit}
+                    type="submit"
+                    className="p-3 rounded-lg text-white bg-blue-500"
                 >
                     Submit
                 </button>
