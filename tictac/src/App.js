@@ -11,6 +11,9 @@
 // import Clock from "./useRef/Clock";
 // import DropDown from "./useRef/DropDown";
 import Input from "./form/Input";
+import MovieSearchApp from "./form/MovieSearchApp";
+import SignUp from "./form/SignUp";
+import SignUp2 from "./form/SignUp2";
 
 function App() {
     // const { show, setShow, nodeRef } = useClickOutSide();
@@ -32,7 +35,10 @@ function App() {
                 <button onClick={setShow(true)}>Clickme</button>
                 <SidebarMenu ref={nodeRef} show={show}></SidebarMenu>
             </div> */}
-            <Input></Input>
+            {/* <Input></Input> */}
+            {/* <MovieSearchApp></MovieSearchApp> */}
+            {/* <SignUp></SignUp> */}
+            <SignUp2></SignUp2>
         </div>
     );
 }

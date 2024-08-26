@@ -1,0 +1,10 @@
+{
+    "posts": [
+        { "id": 1, "title": "Hello World", "author": "John Doe" },
+        { "id": 2, "title": "React is Awesome", "author": "Jane Doe" }
+    ],
+    "comments": [
+        { "id": 1, "postId": 1, "body": "Great post!" },
+        { "id": 2, "postId": 2, "body": "Thanks for the info!" }
+    ]
+}

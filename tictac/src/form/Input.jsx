@@ -20,6 +20,7 @@ const Input = () => {
         email: "",
         hobby: false,
     });
+    
     console.log(values);
     const [nameError, setNameError] = useState("");
     const handleSubmit = (event) => {
