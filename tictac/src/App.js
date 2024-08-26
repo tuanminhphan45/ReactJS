@@ -14,6 +14,7 @@ import Input from "./form/Input";
 import MovieSearchApp from "./form/MovieSearchApp";
 import SignUp from "./form/SignUp";
 import SignUp2 from "./form/SignUp2";
+import SignUpFinal from "./form/SignUpFinal";
 
 function App() {
     // const { show, setShow, nodeRef } = useClickOutSide();
@@ -38,7 +39,8 @@ function App() {
             {/* <Input></Input> */}
             {/* <MovieSearchApp></MovieSearchApp> */}
             {/* <SignUp></SignUp> */}
-            <SignUp2></SignUp2>
+            {/* <SignUp2></SignUp2> */}
+            <SignUpFinal></SignUpFinal>
         </div>
     );
 }
