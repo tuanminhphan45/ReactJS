@@ -31,7 +31,8 @@ const SignUpFinal = () => {
                 className="p-10 w-full max-w-[500px] mx-auto"
                 autoComplete="off"
             >
-                <div className="flex flex-col gap-2 mb-5">
+                <MyInput label="First name" name="firtName" placeholder="Enter your First Name"></MyInput>
+                {/* <div className="flex flex-col gap-2 mb-5">
                     <label htmlFor="firstName">Firstname</label>
                     <Field
                         name="firstName"
@@ -42,7 +43,7 @@ const SignUpFinal = () => {
                     <div className="text-red-500 text-sm ">
                         <ErrorMessage name="firstName"></ErrorMessage>
                     </div>
-                </div>
+                </div> */}
                 <div className="flex flex-col gap-2 mb-5">
                     <label htmlFor="lastName">Last name</label>
                     <Field
@@ -116,6 +117,17 @@ const SignUpFinal = () => {
                 </div>
             </form>
         </Formik>
+    );
+};
+// useField
+// destructuring
+// restparameter
+const MyInput = ({ label, ...props }) => {
+    return (
+        <div className="flex flex-col gap-2 mb-5">
+            <label htmlFor={label}></label>
+            <input type="text" {...props} />
+        </div>
     );
 };
 
