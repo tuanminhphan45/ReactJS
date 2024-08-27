@@ -131,6 +131,9 @@ const SignUpFinal = () => {
 // useField
 // destructuring
 // restparameter
+// useField hỗ trợ toàn diễn từ các function onChange onBLur onTouch và các value tự validate 
+// yêu cầu vẫn khởi tạo giá trị khởi tạo validateSechma
+
 const MyInput = ({ label, ...props }) => {
     const [field, meta] = useField(props);
     console.log(field);
