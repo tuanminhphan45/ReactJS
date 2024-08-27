@@ -1,5 +1,5 @@
 import React from "react";
-import { Formik, Field, ErrorMessage } from "formik";
+import { Formik, Field, ErrorMessage, useField } from "formik";
 import * as Yup from "yup";
 
 const SignUpFinal = () => {
@@ -31,7 +31,16 @@ const SignUpFinal = () => {
                 className="p-10 w-full max-w-[500px] mx-auto"
                 autoComplete="off"
             >
-                <MyInput label="First name" name="firtName" placeholder="Enter your First Name"></MyInput>
+                <MyInput
+                    label="First name"
+                    name="firtName"
+                    placeholder="Enter your First Name"
+                ></MyInput>
+                <MyInput
+                    label="Last name"
+                    name="lastName"
+                    placeholder="Enter your Last Name"
+                ></MyInput>
                 {/* <div className="flex flex-col gap-2 mb-5">
                     <label htmlFor="firstName">Firstname</label>
                     <Field
@@ -44,7 +53,7 @@ const SignUpFinal = () => {
                         <ErrorMessage name="firstName"></ErrorMessage>
                     </div>
                 </div> */}
-                <div className="flex flex-col gap-2 mb-5">
+                {/* <div className="flex flex-col gap-2 mb-5">
                     <label htmlFor="lastName">Last name</label>
                     <Field
                         name="lastName"
@@ -55,7 +64,7 @@ const SignUpFinal = () => {
                     <div className="text-red-500 text-sm ">
                         <ErrorMessage name="firstName"></ErrorMessage>
                     </div>
-                </div>
+                </div> */}
                 <div className="flex flex-col gap-2 mb-5">
                     <label htmlFor="email">Email Adress</label>
                     <Field
@@ -123,10 +132,15 @@ const SignUpFinal = () => {
 // destructuring
 // restparameter
 const MyInput = ({ label, ...props }) => {
+    const [field, meta] = useField(props);
+    console.log(field);
     return (
         <div className="flex flex-col gap-2 mb-5">
-            <label htmlFor={label}></label>
-            <input type="text" {...props} />
+            <label htmlFor={props.id || props.name}>{label}</label>
+            <input type="text" {...props} {...field} />
+            {meta.touched && meta.error ? (
+                <div className="text-sm text-red-600">{meta.error}</div>
+            ) : null}
         </div>
     );
 };
