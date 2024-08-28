@@ -1,13 +1,22 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 const SignUpHook = () => {
+    const schemaValidation = yup.object({
+        // không truyền gì vào thì tin nhắn thông báo lỗi default
+        firstName: yup.string().required().maxLength(10),
+        lastName: yup.string().required().maxLength(10),
+    });
     const {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm();
+    } = useForm({
+        resolver: yupResolver(schemaValidation),
+    });
     const onSubmit = (values) => {};
+    console.log(errors);
 
     return (
         <form
@@ -19,30 +28,33 @@ const SignUpHook = () => {
                 <label htmlFor="firstName">Firstname</label>
                 <input
                     id="firstName"
-                    {...register("firstName", {
-                        required: true,
-                        maxLength: 10,
-                    })}
+                    {...register("firstName")}
+                    // {...register("firstName", {
+                    //     required: true,
+                    //     maxLength: 10,
+                    // })}
                     placeholder="Enter your first name"
                     className="p-4 rounded-md border border-gray-100"
                 />
-                {errors?.firstName?.type === "required" && (
+
+                {errors?.firstName && (
                     <div className="text-red-500 text-sm">
-                        Please fill out this field
+                        {errors.firstName.messeage}
                     </div>
                 )}
-                {errors?.firstName?.type === "maxLength" && (
+                {/* {errors?.firstName?.type === "maxLength" && (
                     <div className="text-red-500 text-sm">Must be 10 Words</div>
-                )}
+                )} */}
             </div>
             <div className="flex flex-col gap-2 mb-5">
                 <label htmlFor="lastName">Last name</label>
                 <input
                     id="lastName"
-                    {...register("lastName", {
-                        required: true,
-                        maxLength: 10,
-                    })}
+                    {...register("lastName")}
+                    // {...register("lastName", {
+                    //     required: true,
+                    //     maxLength: 10,
+                    // })}
                     placeholder="Enter your last name"
                     className="p-4 rounded-md border border-gray-100"
                 />
@@ -51,10 +63,11 @@ const SignUpHook = () => {
                 <label htmlFor="lastName">Email address</label>
                 <input
                     id="email"
-                    {...register("email", {
-                        required: true,
-                        maxLength: 10,
-                    })}
+                    {...register("email")}
+                    // {...register("email", {
+                    //     required: true,
+                    //     maxLength: 10,
+                    // })}
                     placeholder="Enter your Email address"
                     className="p-4 rounded-md border border-gray-100"
                 />
