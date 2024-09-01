@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect } from "react";
-import { useForm, Controller } from "react-hook-form";
+import { useForm, Controller, useController } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import axios from "axios";
@@ -161,20 +161,34 @@ const SignUpHook = () => {
     );
 };
 
+// const MyInput = ({ control, ...props }) => {
+//     return (
+//         <Controller
+//             name={props.name}
+//             control={control}
+//             defaultValue=""
+//             render={({ field }) => (
+//                 <input
+//                     className="p-4 rounded-md border border-gray-100"
+//                     {...field}
+//                     {...props}
+//                 />
+//             )}
+//         ></Controller>
+//     );
+// };
 const MyInput = ({ control, ...props }) => {
+    const { field } = useController({
+        control,
+        name: props.name,
+        defaultValue: "",
+    });
     return (
-        <Controller
-            name={props.name}
-            control={control}
-            defaultValue=""
-            render={({ field }) => (
-                <input
-                    className="p-4 rounded-md border border-gray-100"
-                    {...field}
-                    {...props}
-                />
-            )}
-        ></Controller>
+        <input
+            className="p-4 rounded-md border border-gray-100"
+            {...field}
+            {...props}
+        />
     );
 };
 
