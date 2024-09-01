@@ -10,6 +10,7 @@ const schemaValidation = Yup.object({
     firstName: Yup.string()
         .required("Please enter your first name")
         .max(10, "Must be 10 characters or less"),
+    age: Yup.number(),
 });
 
 const SignUpHook = () => {
@@ -97,14 +98,22 @@ const SignUpHook = () => {
                 />
             </div>
             <div className="flex flex-col gap-2 mb-5">
-                <input type="checkbox" {...register("showAge")} />
+                <div className="flex flex-row gap-2 mb-5 items-center">
+                    <label htmlFor="Age">Input Age</label>
+                    <input
+                        type="checkbox"
+                        id="Age"
+                        className="w-3 h-3"
+                        {...register("showAge")}
+                    />
+                </div>
 
                 {/* based on yes selection to display Age Input*/}
                 {watchShowAge && (
                     <input
                         type="number"
                         className="p-4 rounded-md border border-gray-100"
-                        {...register("age", { min: 50 })}
+                        {...register("age")}
                     />
                 )}
             </div>
