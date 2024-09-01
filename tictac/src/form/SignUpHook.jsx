@@ -16,18 +16,29 @@ const SignUpHook = () => {
     const {
         register,
         handleSubmit,
-        formState: { errors, isSubmitting },
+        formState: { errors, isSubmitting, isValid, isDirty, dirtyFields},
+        // is Dirty là khi mình chạm vào trường đó sẽ biết
+        // dirtyFields là trả về các trường mình 
     } = useForm({
         resolver: yupResolver(schemaValidation),
+        // lưu ý khi isValid cần add thêm mode: "onChange" mới hoạt động đúng
+        mode: "onChange"
     });
 
     // errors = formState.errors; {}
+    console.log("isValid",isValid);
 
-    const onSubmit =  async (values) => {
-        const response = await axios.get("https://hn.algolia.com/api/v1/search?query=react")
-        return response.data;
+    const onSubmit = async (values) => {
+        // áp dụng để check đủ điều kiện để send data to backend chưa
+        if(isValid){
+            console.log("send data to backend")
+        }
+        // const response = await axios.get(
+        //     "https://hn.algolia.com/api/v1/search?query=react"
+        // );
+        // return response.data;
         // lưu ý isSubmitting có call api hoặc backend thì mới có delay
-                    // return new Promise((resolve) => {
+        // return new Promise((resolve) => {
         //     setTimeout(() => {
         //         resolve();
         //     }, 500);
