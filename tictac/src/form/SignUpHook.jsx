@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import axios from "axios";
+import { first } from "lodash";
 // using react-hook-form
 
 const schemaValidation = Yup.object({
@@ -18,6 +19,9 @@ const SignUpHook = () => {
         register,
         handleSubmit,
         watch,
+        reset,
+        resetField,
+        // resetField là reset 1 trường nào đó thôi
         formState: { errors, isSubmitting, isValid, isDirty, dirtyFields },
         // is Dirty là khi mình chạm vào trường đó sẽ biết
         // dirtyFields là trả về các trường mình
@@ -35,7 +39,13 @@ const SignUpHook = () => {
         // áp dụng để check đủ điều kiện để send data to backend chưa
         if (isValid) {
             console.log("send data to backend");
+            reset({
+                firstName: "",
+                lastName: "",
+            });
+            resetField("age");
         }
+
         // const response = await axios.get(
         //     "https://hn.algolia.com/api/v1/search?query=react"
         // );
