@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
@@ -22,6 +22,8 @@ const SignUpHook = () => {
         reset,
         resetField,
         // resetField là reset 1 trường nào đó thôi
+        setFocus,
+        setValue,
         formState: { errors, isSubmitting, isValid, isDirty, dirtyFields },
         // is Dirty là khi mình chạm vào trường đó sẽ biết
         // dirtyFields là trả về các trường mình
@@ -34,7 +36,15 @@ const SignUpHook = () => {
     // errors = formState.errors; {}
     console.log("isValid", isValid);
     const watchShowAge = watch("showAge", false);
-
+    useEffect(() => {
+        setFocus("firstName");
+        // tự động forcus vào ô input firtName khi load trang
+    }, [setFocus]);
+    const handleDemo = () => {
+        setValue("firstName", "Minh");
+        setValue("lastName", "Phan");
+        setValue("email", "tuanminhphan45@gmail.com");
+    };
     const onSubmit = async (values) => {
         // áp dụng để check đủ điều kiện để send data to backend chưa
         if (isValid) {
@@ -128,7 +138,7 @@ const SignUpHook = () => {
                 )}
             </div>
 
-            <div>
+            <div className="flex flex-col gap-3">
                 <button
                     type="submit"
                     className="w-full p-4 bg-blue-600 text-white font-semibold rounded-lg"
@@ -138,6 +148,12 @@ const SignUpHook = () => {
                     ) : (
                         "Submit"
                     )}
+                </button>
+                <button
+                    className="w-full p-4 bg-green-600 text-white font-semibold rounded-lg"
+                    onClick={handleDemo}
+                >
+                    Demo
                 </button>
             </div>
         </form>
