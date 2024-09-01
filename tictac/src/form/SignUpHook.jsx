@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import axios from "axios";
@@ -24,6 +24,8 @@ const SignUpHook = () => {
         // resetField là reset 1 trường nào đó thôi
         setFocus,
         setValue,
+
+        control,
         formState: { errors, isSubmitting, isValid, isDirty, dirtyFields },
         // is Dirty là khi mình chạm vào trường đó sẽ biết
         // dirtyFields là trả về các trường mình
@@ -109,13 +111,12 @@ const SignUpHook = () => {
             </div>
             <div className="flex flex-col gap-2 mb-5">
                 <label htmlFor="email">Email address</label>
-                <input
-                    type="email"
-                    id="email"
+                <MyInput
+                    name="email"
                     placeholder="Enter your email address"
-                    className="p-4 rounded-md border border-gray-100"
-                    {...register("email")}
-                />
+                    id="email"
+                    control={control}
+                ></MyInput>
             </div>
             <div className="flex flex-col gap-2 mb-5">
                 <div className="flex flex-row gap-2 mb-5 items-center">
@@ -157,6 +158,23 @@ const SignUpHook = () => {
                 </button>
             </div>
         </form>
+    );
+};
+
+const MyInput = ({ control, ...props }) => {
+    return (
+        <Controller
+            name={props.name}
+            control={control}
+            defaultValue=""
+            render={({ field }) => (
+                <input
+                    className="p-4 rounded-md border border-gray-100"
+                    {...field}
+                    {...props}
+                />
+            )}
+        ></Controller>
     );
 };
 
