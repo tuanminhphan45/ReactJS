@@ -16,22 +16,24 @@ const SignUpHook = () => {
     const {
         register,
         handleSubmit,
-        formState: { errors, isSubmitting, isValid, isDirty, dirtyFields},
+        watch,
+        formState: { errors, isSubmitting, isValid, isDirty, dirtyFields },
         // is Dirty là khi mình chạm vào trường đó sẽ biết
-        // dirtyFields là trả về các trường mình 
+        // dirtyFields là trả về các trường mình
     } = useForm({
         resolver: yupResolver(schemaValidation),
         // lưu ý khi isValid cần add thêm mode: "onChange" mới hoạt động đúng
-        mode: "onChange"
+        mode: "onChange",
     });
 
     // errors = formState.errors; {}
-    console.log("isValid",isValid);
+    console.log("isValid", isValid);
+    const watchShowAge = watch("showAge", false);
 
     const onSubmit = async (values) => {
         // áp dụng để check đủ điều kiện để send data to backend chưa
-        if(isValid){
-            console.log("send data to backend")
+        if (isValid) {
+            console.log("send data to backend");
         }
         // const response = await axios.get(
         //     "https://hn.algolia.com/api/v1/search?query=react"
@@ -94,6 +96,19 @@ const SignUpHook = () => {
                     {...register("email")}
                 />
             </div>
+            <div className="flex flex-col gap-2 mb-5">
+                <input type="checkbox" {...register("showAge")} />
+
+                {/* based on yes selection to display Age Input*/}
+                {watchShowAge && (
+                    <input
+                        type="number"
+                        className="p-4 rounded-md border border-gray-100"
+                        {...register("age", { min: 50 })}
+                    />
+                )}
+            </div>
+
             <div>
                 <button
                     type="submit"
