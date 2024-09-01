@@ -1,23 +1,35 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
+import * as Yup from "yup";
+import axios from "axios";
+// using react-hook-form
+
+const schemaValidation = Yup.object({
+    firstName: Yup.string()
+        .required("Please enter your first name")
+        .max(10, "Must be 10 characters or less"),
+});
+
 const SignUpHook = () => {
-    const schemaValidation = yup.object({
-        // không truyền gì vào thì tin nhắn thông báo lỗi default
-        firstName: yup.string().required().maxLength(10),
-        lastName: yup.string().required().maxLength(10),
-    });
     const {
         register,
         handleSubmit,
-        formState: { errors },
+        formState: { errors, isSubmitting },
     } = useForm({
         resolver: yupResolver(schemaValidation),
     });
-    const onSubmit = (values) => {};
-    console.log(errors);
 
+    // errors = formState.errors; {}
+
+    const onSubmit = (values) => {
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                resolve();
+            }, 500);
+        });
+    };
     return (
         <form
             onSubmit={handleSubmit(onSubmit)}
@@ -25,51 +37,47 @@ const SignUpHook = () => {
             autoComplete="off"
         >
             <div className="flex flex-col gap-2 mb-5">
-                <label htmlFor="firstName">Firstname</label>
+                <label htmlFor="firstName">First name</label>
                 <input
+                    type="text"
                     id="firstName"
-                    {...register("firstName")}
-                    // {...register("firstName", {
-                    //     required: true,
-                    //     maxLength: 10,
-                    // })}
                     placeholder="Enter your first name"
                     className="p-4 rounded-md border border-gray-100"
+                    {...register("firstName")}
+                    // {...register("firstName", {
+                    //   required: true,
+                    //   maxLength: 10,
+                    // })}
                 />
-
                 {errors?.firstName && (
                     <div className="text-red-500 text-sm">
-                        {errors.firstName.messeage}
+                        {errors.firstName?.message}
                     </div>
                 )}
                 {/* {errors?.firstName?.type === "maxLength" && (
-                    <div className="text-red-500 text-sm">Must be 10 Words</div>
-                )} */}
+          <div className="text-red-500 text-sm">
+            Must be 10 characters or less
+          </div>
+        )} */}
             </div>
             <div className="flex flex-col gap-2 mb-5">
                 <label htmlFor="lastName">Last name</label>
                 <input
+                    type="text"
                     id="lastName"
-                    {...register("lastName")}
-                    // {...register("lastName", {
-                    //     required: true,
-                    //     maxLength: 10,
-                    // })}
-                    placeholder="Enter your last name"
+                    placeholder="Enter your first name"
                     className="p-4 rounded-md border border-gray-100"
+                    {...register("lastName")}
                 />
             </div>
             <div className="flex flex-col gap-2 mb-5">
-                <label htmlFor="lastName">Email address</label>
+                <label htmlFor="email">Email address</label>
                 <input
+                    type="email"
                     id="email"
-                    {...register("email")}
-                    // {...register("email", {
-                    //     required: true,
-                    //     maxLength: 10,
-                    // })}
-                    placeholder="Enter your Email address"
+                    placeholder="Enter your email address"
                     className="p-4 rounded-md border border-gray-100"
+                    {...register("email")}
                 />
             </div>
             <div>
@@ -77,10 +85,15 @@ const SignUpHook = () => {
                     type="submit"
                     className="w-full p-4 bg-blue-600 text-white font-semibold rounded-lg"
                 >
-                    Submit
+                    {isSubmitting ? (
+                        <div className="mx-auto w-5 h-5 border-2 border-white border-t-2 border-t-transparent rounded-full animate-spin"></div>
+                    ) : (
+                        "Submit"
+                    )}
                 </button>
             </div>
         </form>
     );
 };
+
 export default SignUpHook;
