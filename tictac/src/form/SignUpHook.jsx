@@ -23,12 +23,15 @@ const SignUpHook = () => {
 
     // errors = formState.errors; {}
 
-    const onSubmit = (values) => {
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                resolve();
-            }, 500);
-        });
+    const onSubmit =  async (values) => {
+        const response = await axios.get("https://hn.algolia.com/api/v1/search?query=react")
+        return response.data;
+        // lưu ý isSubmitting có call api hoặc backend thì mới có delay
+                    // return new Promise((resolve) => {
+        //     setTimeout(() => {
+        //         resolve();
+        //     }, 500);
+        // });
     };
     return (
         <form
