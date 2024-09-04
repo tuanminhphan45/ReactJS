@@ -1,7 +1,11 @@
-import "./App.css";
+import ResgiterFormik from "./components/form/ResigterFormilk.jsx";
 
 function App() {
-    return <></>;
+    return (
+        <>
+            <ResgiterFormik></ResgiterFormik>
+        </>
+    );
 }
 
 export default App;
