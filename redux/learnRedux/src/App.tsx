@@ -4,32 +4,16 @@ import viteLogo from '/vite.svg'
 import Button from 'react-bootstrap/Button';
 import { useAppDispatch, useAppSelector } from './redux/hooks';
 import { increment } from './redux/count/count.slice';
+import Header from './components/header';
+import TabsContent from './components/table.content';
+import UsersTable from './components/user.table';
 function App() {
-  const count = useAppSelector(state => state.counter);
-  const dispatch = useAppDispatch();
-
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <Button variant ='warning' onClick={() =>{
+      <Header></Header>
+      <TabsContent/>
+      {/* <UsersTable/> */}
 
-          debugger
-          dispatch(increment())
-        }}>
-          count is {count.value}
-        </Button>
-        
-      </div>
-      
     </>
   )
 }
