@@ -1,6 +1,8 @@
 import Table from 'react-bootstrap/Table';
-import Container from 'react-bootstrap/Container';
+
 import { useEffect, useState } from 'react';
+import { useAppDispatch } from '../redux/hooks';
+import { fetchListUser } from '../redux/user/user.slide';
 // trong typescipts cần khởi tạo kiểu dữ liệu
 interface IUser {
     id: number;
@@ -10,14 +12,19 @@ interface IUser {
 
 function UsersTable() {
     // <IUser[]> là khai báo kiểu tập dữ liệu của users là một arrays chứa IUser(id,name,email)
-    const [users,setUser] = useState<IUser[]>([]);
-    const fetchUser =  async () => {
-     const res =  await fetch('http://localhost:8000/users');
-     const data = await res.json();
-     setUser(data);     
-    }
+    // const [users,setUser] = useState<IUser[]>([]);
+    // const fetchUser =  async () => {
+    //  const res =  await fetch('http://localhost:8000/users');
+    //  const data = await res.json();
+    //  setUser(data);     
+    // }
+    // useEffect(()=>{
+    //     fetchUser();
+    // },[])
+    const dispatch = useAppDispatch();
+
     useEffect(()=>{
-        fetchUser();
+        dispatch(fetchListUser());
     },[])
     return (
     
@@ -30,7 +37,7 @@ function UsersTable() {
                     </tr>
                 </thead>
                 <tbody>
-                    {users?.map(user => {
+                    {/* {users?.map(user => {
                         return (
                         <tr key={user.id}>
                             <td>{user.id}</td>
@@ -38,7 +45,7 @@ function UsersTable() {
                             <td>{user.email}</td>
                         </tr>
                         )
-                    })}
+                    })} */}
                     
                     
                     
