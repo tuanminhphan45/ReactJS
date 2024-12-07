@@ -20,6 +20,7 @@ function Header() {
               onChange={(e) => setMode(e.target.value ==='light'? 'dark':'light')}
               type="switch"
               id="custom-switch"
+              // tại sao phải dùng thẻ <Navbar.Text> bởi vì dùng light/dark mode của bootstrap thì phải dùng thì khi nó chuyển nó sẽ đổi css phần đó luôn 
               label={mode === 'light'? <Navbar.Text>Light Mode</Navbar.Text>:<Navbar.Text>Dark Mode</Navbar.Text>}
             />
           </Form>
