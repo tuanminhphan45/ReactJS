@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import type { PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '../store'
 
 // khởi tạo dữ liệu user
@@ -8,43 +7,84 @@ interface User {
     name: string,
     email: string,
 }
-// Define a type for the slice state
-interface CounterState {
-    listUsers: Array<User>
-}
 
-export const fetchListUser = createAsyncThunk(
+
+export const fetchListUsers = createAsyncThunk(
     // đơn giản là tên hiện thị trong redux tookit =)) 
-    'users/fetchListUser',
+    'users/fetchListUsers',
     // logic fetch api 
-    async (userId, thunkAPI) => {
+    async () => {
         const res =  await fetch('http://localhost:8000/users');
         const data = await res.json();
         return data;
     },
   )
 
+// khởi tạo giá trị interface đầu vào truyền vào redux
+  interface iUserPlayload {
+  name : string,
+  email: string
+}
+export const createNewUser = createAsyncThunk(
+    // đơn giản là tên hiện thị trong redux tookit =)) 
+    'users/createNewUser',
+    // logic fetch api 
+    async (playload:iUserPlayload, thunkApi) => {
+        const res =  await fetch('http://localhost:8000/users', {
+          method: "POST",
+          body: JSON.stringify({
+            name : playload.name,
+            email: playload.email
+          }),
+          headers: {
+            "Content-Type":"application/json"
+          }
+
+        });
+        const data = await res.json();
+        if(data && data.id ) {
+          thunkApi.dispatch(fetchListUsers())
+        }
+        console.log("data dc truyền từ view to redux", data);
+        return data;
+    },
+  )
+
+  // Define a type for the slice state
+interface CounterState {
+  listUsers: Array<User>,
+  isCreateSuccess: boolean
+}
 // Define the initial state using that type
 const initialState: CounterState = {
   listUsers: [],
+  isCreateSuccess: false
 }
 
 export const userSlide = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    
+    resetCreate: (state) => {
+      state.isCreateSuccess = false;
+    }
   },
   extraReducers: (builder) => {
     // Add reducers for additional action types here, and handle loading state as needed
-    builder.addCase(fetchListUser.fulfilled, (state, action) => {
+    builder.addCase(fetchListUsers.fulfilled, (state, action) => {
       // Add user to the state array
       console.log("check action" , action);
+      state.listUsers = action.payload;
+    }),
+    builder.addCase(createNewUser.fulfilled, (state, action) => {
+      // Add user to the state array
+      console.log("check action" , action);
+      state.isCreateSuccess = true;
     })
     },
 })
 
-export const {  } = userSlide.actions
+export const {resetCreate} = userSlide.actions
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectCount = (state: RootState) => state.counter.value
