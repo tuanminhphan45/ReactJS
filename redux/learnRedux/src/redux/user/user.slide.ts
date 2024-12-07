@@ -80,17 +80,36 @@ export const createNewUser = createAsyncThunk(
       },
     )
 
+  export const deleteAUser = createAsyncThunk(
+    // đơn giản là tên hiện thị trong redux tookit =)) 
+    'users/deleteAUser',
+    // logic fetch api 
+    async (playload:any, thunkApi) => {
+        // console.log(">>>playload data", playload);
+        const res =  await fetch(`http://localhost:8000/users/${playload}`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type":"application/json"
+          }
+
+        });
+        thunkApi.dispatch(fetchListUsers())
+
+    },
+  )
   // Define a type for the slice state
 interface CounterState {
   listUsers: Array<User>,
   isCreateSuccess: boolean
   isUpdateSuccess: boolean;
+  isDeleteSuccess: boolean;
 }
 // Define the initial state using that type
 const initialState: CounterState = {
   listUsers: [],
   isCreateSuccess: false,
-  isUpdateSuccess: false
+  isUpdateSuccess: false,
+  isDeleteSuccess:false
 }
 
 export const userSlide = createSlice({
@@ -103,6 +122,10 @@ export const userSlide = createSlice({
     resetUpdate(state) {
       state.isUpdateSuccess = false;
     },
+    resetDelete(state) {
+      state.isDeleteSuccess = false;
+    },
+
   },
   extraReducers: (builder) => {
     // Add reducers for additional action types here, and handle loading state as needed
@@ -121,10 +144,15 @@ export const userSlide = createSlice({
       console.log("check action" , action);
       state.isUpdateSuccess = true;
     })
+    builder.addCase(deleteAUser.fulfilled, (state, action) => {
+      // Add user to the state array
+      console.log("check action" , action);
+      state.isDeleteSuccess = true;
+    })
     },
 })
 
-export const {resetCreate,resetUpdate} = userSlide.actions
+export const {resetCreate,resetUpdate,resetDelete} = userSlide.actions
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectCount = (state: RootState) => state.counter.value

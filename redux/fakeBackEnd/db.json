@@ -33,16 +33,6 @@
   ],
   "users": [
     {
-      "name": "Eric",
-      "email": "eric@gmail.comfdasfds",
-      "id": 1
-    },
-    {
-      "id": 2,
-      "name": "Hỏi Dân IT",
-      "email": "hoidanit@gmail.com"
-    },
-    {
       "id": 3,
       "name": "Hỏi Dân IT",
       "email": "admin@gmail.com"
