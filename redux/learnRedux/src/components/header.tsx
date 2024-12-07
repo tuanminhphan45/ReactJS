@@ -25,8 +25,9 @@ function Header() {
         <Navbar.Toggle />
           <Form>
             <Form.Check // prettier-ignore
-              value={mode}
-              onChange={(e) => dispatch(changeMode(e.target.value ==='light'? 'dark':'light'))}
+              defaultChecked={mode === "light"?false:true}
+              
+              onChange={(e) => dispatch(changeMode(e.target.checked === true? 'dark':'light'))}
               type="switch"
               id="custom-switch"
               // tại sao phải dùng thẻ <Navbar.Text> bởi vì dùng light/dark mode của bootstrap thì phải dùng thì khi nó chuyển nó sẽ đổi css phần đó luôn 
