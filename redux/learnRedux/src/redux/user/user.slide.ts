@@ -75,7 +75,7 @@ export const createNewUser = createAsyncThunk(
           if(data && data.id ) {
             thunkApi.dispatch(fetchListUsers())
           }
-          console.log("data dc truyền từ view to redux", data);
+          // console.log("data dc truyền từ view to redux", data);
           return data;
       },
     )
@@ -86,7 +86,7 @@ export const createNewUser = createAsyncThunk(
     // logic fetch api 
     async (playload:any, thunkApi) => {
         // console.log(">>>playload data", playload);
-        const res =  await fetch(`http://localhost:8000/users/${playload}`, {
+        await fetch(`http://localhost:8000/users/${playload}`, {
           method: "DELETE",
           headers: {
             "Content-Type":"application/json"

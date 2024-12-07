@@ -1,20 +1,28 @@
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import { useAppSelector } from '../redux/hooks';
+import Form from 'react-bootstrap/Form';
+import { useState } from 'react';
 
 function Header() {
   // thành công sử dụng redux lấy dữ liệu chung từ store
   const users = useAppSelector(state => state.user.listUsers); 
+
+  const [mode,setMode] = useState('light');
   return (
-    <Navbar className="bg-body-tertiary">
+    <Navbar className="bg-body-tertiary" data-bs-theme={mode}>
       <Container>
         <Navbar.Brand href="#home">Phan Minh learning Redux {users.length}</Navbar.Brand>
         <Navbar.Toggle />
-        <Navbar.Collapse className="justify-content-end">
-          <Navbar.Text>
-            Signed in as: <a href="#login">Mark Otto</a>
-          </Navbar.Text>
-        </Navbar.Collapse>
+          <Form>
+            <Form.Check // prettier-ignore
+              value={mode}
+              onChange={(e) => setMode(e.target.value ==='light'? 'dark':'light')}
+              type="switch"
+              id="custom-switch"
+              label={mode === 'light'? <Navbar.Text>Light Mode</Navbar.Text>:<Navbar.Text>Dark Mode</Navbar.Text>}
+            />
+          </Form>
       </Container>
     </Navbar>
   );
