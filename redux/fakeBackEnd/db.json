@@ -33,9 +33,9 @@
   ],
   "users": [
     {
-      "id": 1,
       "name": "Eric",
-      "email": "eric@gmail.com"
+      "email": "eric@gmail.comfdasfds",
+      "id": 1
     },
     {
       "id": 2,
