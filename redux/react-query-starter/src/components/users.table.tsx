@@ -63,8 +63,8 @@ function UsersTable() {
         )
     })
 
-    const { isPending, error, data } = useQuery({
-        queryKey: ['repoData'],
+    const { isPending, error, data:users } = useQuery({
+        queryKey: ['fetchUsers'],
         queryFn: () =>
         fetch('http://localhost:8000/users').then((res) =>
             res.json(),
