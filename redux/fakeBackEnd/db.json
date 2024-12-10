@@ -1,28 +1,65 @@
 {
   "blogs": [
     {
-      "id": 5,
-      "title": "Where can I get some?",
-      "author": "Hỏi Dân IT",
-      "content": "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc."
+      "id": 6,
+      "title": "Exploring the World of AI",
+      "author": "Tech Savvy",
+      "content": "Artificial intelligence has transformed various industries, paving the way for groundbreaking innovations. From healthcare to finance, AI algorithms streamline processes and enhance decision-making capabilities. This blog delves into the latest trends and applications of AI in our everyday lives."
     },
     {
-      "title": "oki",
-      "author": "mai",
-      "content": "mai",
-      "id": 11
+      "id": 7,
+      "title": "The Rise of Sustainable Tech",
+      "author": "Eco Guru",
+      "content": "Sustainability has become a cornerstone of modern technology. With the growing emphasis on eco-friendly practices, companies are investing in renewable energy, biodegradable materials, and efficient resource management. This article explores how technology is driving sustainability forward."
+    },
+    {
+      "id": 8,
+      "title": "The Future of Web Development",
+      "author": "Dev Ninja",
+      "content": "Web development is rapidly evolving with frameworks like React, Vue, and Svelte. Developers are now focusing on performance, accessibility, and SEO optimization to deliver exceptional user experiences. This blog sheds light on the future of web technologies and practices."
+    },
+    {
+      "id": 9,
+      "title": "Cybersecurity in the Digital Age",
+      "author": "Security Expert",
+      "content": "As we embrace digital transformation, the need for robust cybersecurity measures has never been greater. This article provides insights into the latest trends, tools, and best practices for safeguarding data in an increasingly connected world."
     }
   ],
   "users": [
     {
-      "name": "123dfas",
-      "email": "minh",
-      "id": 4
+      "name": "Alice Johnson",
+      "email": "alice.johnson@example.com",
+      "id": 6
     },
     {
-      "name": "1233",
-      "email": "Minh",
-      "id": 5
+      "name": "Bob Smith",
+      "email": "bob.smith@example.com",
+      "id": 7
+    },
+    {
+      "name": "Charlie Brown",
+      "email": "charlie.brown@example.com",
+      "id": 8
+    },
+    {
+      "name": "Diana Ross",
+      "email": "diana.ross@example.com",
+      "id": 9
+    },
+    {
+      "name": "Edward Cullen",
+      "email": "edward.cullen@example.com",
+      "id": 10
+    },
+    {
+      "name": "Fiona Green",
+      "email": "fiona.green@example.com",
+      "id": 11
+    },
+    {
+      "email": "minh",
+      "name": "ok",
+      "id": 12
     }
   ]
 }
