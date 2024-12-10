@@ -3,7 +3,9 @@ import Modal from 'react-bootstrap/Modal';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import { useState } from 'react';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { toast } from 'react-toastify';
+import { Spinner } from 'react-bootstrap';
 
 interface IUser{
     email: string,
@@ -13,7 +15,7 @@ interface IUser{
 
 const UserCreateModal = (props: any) => {
     const { isOpenCreateModal, setIsOpenCreateModal } = props;
-
+    const queryClient = useQueryClient()
     const [email, setEmail] = useState<string>("");
     const [name, setName] = useState<string>("");
 
@@ -30,7 +32,17 @@ const UserCreateModal = (props: any) => {
                 }
                 });
             return res.json
+            
         },
+        // giống bên redux cho biết nó thành công sẽ làm gì.
+        onSuccess: (data, variables, context)=>{
+            toast('create succeed')
+            setIsOpenCreateModal(false);
+            setEmail("");
+            setName("")
+            // hàm này thông báo trong react query data của "fetchUser" yêu cầu nó fetch lại \\
+            queryClient.invalidateQueries({ queryKey: ['fetchUser'] })
+        }
       })
     const handleSubmit = () => {
         if (!email) {
@@ -80,10 +92,32 @@ const UserCreateModal = (props: any) => {
                     </FloatingLabel>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button
-                        variant='warning'
-                        onClick={() => setIsOpenCreateModal(false)} className='mr-2'>Cancel</Button>
-                    <Button onClick={() => handleSubmit()}>Save</Button>
+                    {!mutation.isPending? (
+                        <>
+                            <Button
+                                variant="warning"
+                                onClick={() => setIsOpenCreateModal(false)}
+                                className="mr-2"
+                            >
+                                Cancel
+                            </Button>
+                            <Button onClick={() => handleSubmit()}>Save</Button>
+                        </>
+                        ) : (
+                        <Button variant="primary" disabled>
+                            <Spinner
+                                as="span"
+                                animation="border"
+                                size="sm"
+                                role="status"
+                                aria-hidden="true"
+                            />
+                            Saving...
+                        </Button>
+                    )}
+
+                    
+                    
                 </Modal.Footer>
             </Modal>
         </>

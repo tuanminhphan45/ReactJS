@@ -4,6 +4,8 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import { useState, useEffect } from 'react';
 
+
+
 const BlogEditModal = (props: any) => {
     const { isOpenUpdateModal, setIsOpenUpdateModal, dataBlog } = props;
     const [id, setId] = useState();
@@ -12,6 +14,7 @@ const BlogEditModal = (props: any) => {
     const [author, setAuthor] = useState<string>("");
     const [content, setContent] = useState<string>("");
 
+    
     useEffect(() => {
         if (dataBlog?.id) {
             setId(dataBlog?.id);
